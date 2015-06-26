@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="DribbbleApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Dribbble</title>
+	<script src="node_modules/angular/angular.min.js"></script>
+	<script src="js/dribbble.js"></script>
+</head>
+<body>
+	<div ng-controller="PostListController as postList">
+		
+        <div ng-repeat="post in postList.posts.shots">
+          <span>{{post.title}}</span>
+          <img src="{{post.image_url}}" alt="{{post.title}}">
+        </div>
+
+	</div>
+</body>
+</html>
