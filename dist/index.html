@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="DribbbleApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Dribbble</title>
+
+	<script src="js/api/angular.min.js"></script>
+	<script src="js/api/ng-infinite-scroll.min.js"></script>
+	<script src="js/dribbble.min.js"></script>
+
+
+	<style></style>
+</head>
+<body>
+	<div ng-controller="PostListController as postList">
+
+		<div infinite-scroll="postList.nextPage()">
+		
+       		<div ng-repeat="post in postList.posts">
+        		<span class='title'>{{post.title}}</span>
+          		<img src="{{post.image_url}}" alt="{{post.title}}">
+        	</div>
+
+        </div>
+
+        <div ng-show='postList.busy'>Loading data...</div>
+
+	</div>
+</body>
+</html>

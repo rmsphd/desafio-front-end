@@ -1,7 +1,8 @@
 # desafio-front-end
 
 TODO:
-- angularjs
+- angularjs, ok
+- gulp, lint, uglify
 - spa
 - Service worker
 - Mobile
