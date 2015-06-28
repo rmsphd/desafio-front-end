@@ -1,0 +1,15 @@
+<div ng-controller="PostListController as postList">
+
+  <div class='list' infinite-scroll='postList.nextPage()' infinite-scroll-disabled='postList.busy' infinite-scroll-distance='1'>
+    
+    <div ng-repeat="post in postList.posts">
+      
+      <a href="item.html?id={{post.id}}"><span class='title'>{{post.title}}</span></a>
+      <div afkl-lazy-image="{{post.image_teaser_url}} 200w, {{post.image_400_url||post.image_url}} 400w, {{post.image_url}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+    </div>
+
+  </div>
+
+  <div class='load' ng-if='postList.busy'>Loading data...</div>
+
+</div>

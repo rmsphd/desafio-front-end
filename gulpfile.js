@@ -8,7 +8,7 @@ var sass = require('gulp-sass');
 
 var filesjs = "./src/js/*.js";
 var filesscss = "./src/sass/*.scss";
-var filehtml = "./src/*.html";
+var filehtml = "./src/index.html";
 
 gulp.task('lint', function() {
 
@@ -38,14 +38,19 @@ gulp.task('dist', ['sass'], function() {
         .pipe(gulp.dest('./dist/js'));
 
     gulp.src(filehtml)
+        .pipe(rename("item.html"))
+        .pipe(gulp.dest('src/'))
+        .pipe(rename("index.html"))
         .pipe(htmlreplace({
             'js': 'js/dribbble.min.js'
         }))
+        .pipe(gulp.dest('dist/'))
+        .pipe(rename("item.html"))
         .pipe(gulp.dest('dist/'));
 
 });
 
-gulp.task('default', function() {
+gulp.task('default', ['dist'], function() {
 
     gulp.watch([filesjs, filesscss, filehtml], ['lint', 'dist']);
 

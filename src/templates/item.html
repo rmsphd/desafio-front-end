@@ -1,0 +1,5 @@
+<div class='list' ng-controller='ItemController as item'>
+	<span class='title'>{{item.post.title}}</span>
+    <div afkl-lazy-image="{{item.post.image_teaser_url}} 200w, {{item.post.image_400_url||item.post.image_url}} 400w, {{item.post.image_url}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+    <div class='load' ng-if='item.busy'>Loading data...</div>
+</div>

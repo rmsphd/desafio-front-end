@@ -1,5 +1,6 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
+$panel-color: #FFF;
 
 body {
   font: 100% $font-stack;
@@ -9,3 +10,5 @@ body {
 .title {
 	display: block;
 }
+
+@import 'lazy-image-style';

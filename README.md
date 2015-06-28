@@ -2,7 +2,7 @@
 
 TODO:
 - angularjs, ok
-- gulp, lint, uglify
+- gulp, lint, uglify, rename, dist, sass
 - spa
 - Service worker
 - Mobile
