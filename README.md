@@ -1,15 +1,9 @@
 # desafio-front-end
 
+Rafael Mendes Sienna
+
+[Versão executando](https://dl.dropboxusercontent.com/u/6825872/desafio-front-end/index.html)
+
+
 TODO:
-- angularjs, ok
-- gulp, lint, uglify, rename, dist, sass
-- spa, ok
-- Service worker
-- Mobile
-- Offline
-- Responsivo
-- Responsivo images
-- Cache
-- teste com Jasmine e Travis
-- validar warning e w3c
-- gulp sass, 
+- Testes

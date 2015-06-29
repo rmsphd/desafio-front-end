@@ -1,15 +1,14 @@
 angular.module('dribbbleApp', ['ngRoute', 'infinite-scroll', 'afkl.lazyImage'])
     .config(function($routeProvider, $locationProvider) {
-        $routeProvider.when('/', {
-            templateUrl: '/templates/list.html',
+        $routeProvider.when('/index.html', {
+            templateUrl: 'templates/list.html',
             controller: 'PostListController as postList'
         }).when('/item.html', {
-            templateUrl: '/templates/item.html',
+            templateUrl: 'templates/item.html',
             controller: 'ItemController as item'
         });
         $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
+            enabled: true
         });
     })
     .controller('PostListController', function($http, $location) {
@@ -34,7 +33,7 @@ angular.module('dribbbleApp', ['ngRoute', 'infinite-scroll', 'afkl.lazyImage'])
 
             if (postList.page > postList.maxpage) return;
 
-            $http.jsonp('http://api.dribbble.com/shots/popular?page=' + postList.page + '&callback=JSON_CALLBACK', {
+            $http.jsonp('https://api.dribbble.com/shots/popular?page=' + postList.page + '&callback=JSON_CALLBACK', {
                 cache: true
             }).success(function(data) {
 
@@ -57,7 +56,7 @@ angular.module('dribbbleApp', ['ngRoute', 'infinite-scroll', 'afkl.lazyImage'])
         if (item.busy) return;
         item.busy = true;
 
-        $http.jsonp('http://api.dribbble.com/shots/' + $routeParams.id + '?callback=JSON_CALLBACK', {
+        $http.jsonp('https://api.dribbble.com/shots/' + $routeParams.id + '?callback=JSON_CALLBACK', {
             cache: true
         }).success(function(data) {
 

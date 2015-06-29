@@ -9,7 +9,7 @@ var minifyCss = require('gulp-minify-css');
 var replace = require('gulp-replace');
 var fs = require('fs');
 
-var filesjs = "./src/js/*.js";
+var filesjs = "./src/js/dribbble.js";
 var filesscss = "./src/sass/*.scss";
 var filescss = "./src/css/main.css";
 var filehtml = "./src/index.html";
