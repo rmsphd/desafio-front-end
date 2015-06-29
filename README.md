@@ -3,7 +3,7 @@
 TODO:
 - angularjs, ok
 - gulp, lint, uglify, rename, dist, sass
-- spa
+- spa, ok
 - Service worker
 - Mobile
 - Offline
@@ -12,4 +12,4 @@ TODO:
 - Cache
 - teste com Jasmine e Travis
 - validar warning e w3c
-- gulp sass
+- gulp sass, 

@@ -1,14 +1,100 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 $panel-color: #FFF;
+$back-color: #F2F2F2;
+$title-font-size: 1.4em;
+$default-font-size: 1em;
+$title-font-color: white;
+
+@mixin box-shadow($top, $left, $blur, $size, $color) {
+	-webkit-box-shadow: $top $left $blur $size $color;
+	-moz-box-shadow: $top $left $blur $size $color;
+	box-shadow: $top $left $blur $size $color;
+}
 
 body {
   font: 100% $font-stack;
   color: $primary-color;
 }
 
+.item {
+	position: relative;
+	margin-bottom: 20px;
+}
+
 .title {
 	display: block;
+	position: absolute;
+	text-decoration: none;
+	bottom: 0;
+  	z-index: 2;
+  	background-color: rgba(0,0,0,0.7);
+  	color: $title-font-color;
+  	padding: 15px 0;
+  	width: 100%;
+  	font-size: $title-font-size;
+  	@include box-shadow(1px, 1px, 1px, 1px, white);
+
+	span {
+		padding-left: 20px;
+	}
+
 }
+
+.player {
+	position: relative;
+	height: 50px;
+
+	img {
+		border-radius: 30px;
+  		width: 45px;
+  		position: absolute;
+	}
+
+	span {
+		padding-top: 15px;
+  		position: absolute;
+  		left: 60px;
+  		font-size: $title-font-size;
+	}
+
+}
+
+body {
+	background-color: $back-color;
+}
+
+.load {
+	position: fixed;
+	bottom: 3px;
+	width: 100%;
+    text-align: center;
+}
+
+.list {
+	width: 800px;
+	margin: 0 auto;
+	background-color: $panel-color;
+	padding: 20px;
+	@include box-shadow(0px, 0px, 10px, 0px, rgba(0,0,0,0.75));
+
+}	
+
+@media(max-width:320px) {
+
+}
+
+@media(max-width:767px) {
+
+	.title , .player span {
+		font-size: $default-font-size;
+	}
+	
+	.list {
+		width: calc(100% - 20px);
+  		padding: 10px;
+	}
+}
+
 
 @import 'lazy-image-style';

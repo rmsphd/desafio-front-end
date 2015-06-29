@@ -5,37 +5,55 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var htmlreplace = require('gulp-html-replace');
 var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
+var replace = require('gulp-replace');
+var fs = require('fs');
 
 var filesjs = "./src/js/*.js";
 var filesscss = "./src/sass/*.scss";
+var filescss = "./src/css/main.css";
 var filehtml = "./src/index.html";
+var templates = "./src/templates/**/*";
 
 gulp.task('lint', function() {
 
-    gulp.src(filesjs)
+    return gulp.src(filesjs)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 
 });
 
 gulp.task('sass', function() {
-    gulp.src(filesscss)
+    return gulp.src(filesscss)
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest('./src/css'));
 });
 
-gulp.task('dist', ['sass'], function() {
+gulp.task('cssmin', ['sass'], function() {
+    return gulp.src(filescss)
+        .pipe(minifyCss())
+        .pipe(rename("main.min.css"))
+        .pipe(gulp.dest('./src/css'));
+});
 
-    gulp.src("./src/js/api/*.min.js")
-        .pipe(gulp.dest('./dist/js/api'));
-
-    gulp.src("./src/css/**/*")
-        .pipe(gulp.dest('./dist/css'));
-
-    gulp.src("./src/js/dribbble.js")
+gulp.task('uglify', function() {
+    return gulp.src("./src/js/dribbble.js")
         .pipe(rename('dribbble.min.js'))
-        .pipe(uglify())
+        .pipe(uglify({
+            mangle: false
+        }))
+        .pipe(gulp.dest('./src/js'));
+
+});
+
+gulp.task('dist', ['cssmin', 'uglify'], function() {
+
+    gulp.src(["./src/js/api/ng-infinite-scroll.min.js", "./src/js/api/lazy-image.min.js", "./src/js/dribbble.min.js"])
+        .pipe(concat("dribbble.min.js"))
         .pipe(gulp.dest('./dist/js'));
+
+    gulp.src(templates)
+        .pipe(gulp.dest('./dist/templates'));
 
     gulp.src(filehtml)
         .pipe(rename("item.html"))
@@ -43,6 +61,10 @@ gulp.task('dist', ['sass'], function() {
         .pipe(rename("index.html"))
         .pipe(htmlreplace({
             'js': 'js/dribbble.min.js'
+        }))
+        .pipe(replace(/<link href="css\/main.css"[^>]*>/, function(s, filename) {
+            var style = fs.readFileSync("src/css/main.min.css", 'utf8');
+            return '<style>\n' + style + '\n</style>';
         }))
         .pipe(gulp.dest('dist/'))
         .pipe(rename("item.html"))
@@ -52,6 +74,6 @@ gulp.task('dist', ['sass'], function() {
 
 gulp.task('default', ['dist'], function() {
 
-    gulp.watch([filesjs, filesscss, filehtml], ['lint', 'dist']);
+    gulp.watch([filesjs, filesscss, filehtml, templates], ['lint', 'dist']);
 
 });
